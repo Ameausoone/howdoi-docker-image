@@ -1,8 +1,6 @@
 name: Publish Docker
 on:
   push:
-    branches:
-      - main
   schedule:
     - cron: '0 2 * * 0' # Weekly on Sundays at 02:00
 jobs:
@@ -11,9 +9,12 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Publish to Registry
+      id: push
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: ameausoone/howdoi-docker-image/howdoi
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
         registry: ghcr.io
+    - name: Print docker image size
+      run: docker image ghcr.io/ameausoone/howdoi-docker-image/howdoi:${{ steps.push.outputs.digest }} --format='{{.Size}}' @
