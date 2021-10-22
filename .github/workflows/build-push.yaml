@@ -17,4 +17,4 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
         registry: ghcr.io
     - name: Print docker image size
-      run: docker image inspect ghcr.io/ameausoone/howdoi-docker-image/howdoi:${{ steps.push.outputs.digest }} --format='{{.Size}}'
+      run: docker image inspect ${{ steps.push.outputs.digest }} --format='{{.Size}}'
