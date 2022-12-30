@@ -10,7 +10,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Publish to Registry
       id: push
-      uses: elgohr/Publish-Docker-Github-Action@master
+      uses: elgohr/Publish-Docker-Github-Action@v5
       with:
         name: ameausoone/howdoi-docker-image/howdoi
         username: ${{ github.actor }}
